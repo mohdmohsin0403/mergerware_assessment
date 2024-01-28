@@ -1,19 +1,14 @@
-# Meteor Project
+# Loan Management App
 
-A mini user authentication application built with Meteor and Blaze, using OneUI HTML templates for the user and registration forms. 
-
-See [live demo here!](https://glacial-mesa-74136.herokuapp.com/)
+A simple loan management application built with Meteor and Blaze, allowing users to register, request loans, and manage loan transactions. 
 
 Implemented the following features:
 
-* **User Authentication**: Username and password are compared against the database upon login.
-* **Encryption**: Passwords are encrypted to ensure account security in the event of a database breach.
-* **User Registration**: New users are able to signup. Email and username are checked for uniqueness to ensure non existing user, and alerts displayed if existing user.
-* **Validation**: Form inputs are validated and appropriate error messages displayed to user.
-* **Routing**: If logged in the user is redirected to their home page from all manually entered urls. If home page is accessed directly without logging in the user is redirected to the login page.
-* **Remember Me**: At login the user can choose if they want the site to remember them and keep them logged in.
-* **Not Found**: If the user tries to go directly to any unused paths they will be presented with a "Not Found" page.
-
+* **User Registration**: Users can register using their email. They can choose roles (admin, borrower, lender) during registration.
+* **Loan Request**: Borrowers can request a loan, and the request is reflected on their dashboard.
+* **Loan Confirmation**: Lenders can confirm and pay the loan, and the transaction is reflected on both the lender's and borrower's dashboards.
+* **Dashboard Updates**: Changes in loan status are reflected on each user's dashboard.
+* **Admin Dashboard**: Admin users can view complete transaction history.
 
 ### Getting Started
 
@@ -21,7 +16,6 @@ Implemented the following features:
 2. Install dependencies using the `meteor npm install` command.
 3. Start the web server using the `meteor` command. The app will be served at <http://localhost:3000/>.
 4. Go to <http://localhost:3000/> in your browser.
-
 
 ## Dependencies
 
@@ -42,40 +36,24 @@ Implemented the following features:
 * @babel/runtime
 * meteor-node-stubs
 
-
 ## Example Code
 
-``` Javascript
-
-RememberMe.loginWithPassword(username, password, (error) => {
-          if (error) {
-            validator.showErrors({
-              loginUsername: error.reason,
-            });
-          } else {
-            FlowRouter.go('/home');
-          }
-        }, rememberMe);
-
-
+```javascript
+LoanManagementApp.requestLoan(userId, amount, (error) => {
+  if (error) {
+    // Handle error and show appropriate message
+  } else {
+    // Update borrower's dashboard
+    FlowRouter.go('/dashboard');
+  }
+}, loanDetails);
 ```
-## Process
 
-This was my first exploration into using Meteor or Blaze. I started out by going through the online [Meteor/Blaze tutorial](https://www.meteor.com/tutorials/blaze/creating-an-app) and creating my own [ToDo app](https://github.com/gmcauliffe/simple-todos) with some extra features, including routing. I familiarised myself with the existing code-base (OneUI template) and determined how I could make use of the existing HTML and CSS using Meteor and Blaze. I applied previous research tactics to become familiar with new paradigms, frameworks and libraries. Overall it was a successful experience.
+### Process
+This application is an extension of the existing Meteor/Blaze project. I added new functionalities for user roles, loan requests, and transactions. I utilized Meteor's reactive nature to ensure real-time updates on user dashboards.
 
 ### Next Steps
-
-* Review and refactor
-* Have the login and registration error responses from the server display in the relevant form input depending on the response (currently all render in the top input) 
-* Add in a "Forgot password function"
-* Floating labels on the login form (to match template)
-* Consider possibilities for expanding the functionality of the app beyond user login/registration.
-
-
-## Final Product
-
-!["Screenshot of landing page"](https://github.com/gmcauliffe/meteor-project/blob/master/docs/landing-page.png?raw=true)
-!["Screenshot of login page"](https://github.com/gmcauliffe/meteor-project/blob/master/docs/login.png?raw=true)
-!["Screenshot of registration page"](https://github.com/gmcauliffe/meteor-project/blob/master/docs/register.png?raw=true)
-!["Screenshot of user home page"](https://github.com/gmcauliffe/meteor-project/blob/master/docs/user-home-page.png?raw=true)
-
+- Enhance security measures, especially for financial transactions.
+- Implement a "Forgot password" function.
+- Expand functionality for advanced features.
+- Conduct thorough testing and review for production readiness.
